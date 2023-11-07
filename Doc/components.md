@@ -7,13 +7,13 @@
 **Inputs**: Feature values\  
 **Outputs**: Likelihood (prediction outcomes)
 
-## Subcomponent 1
+# Subcomponent 1
 **Name**: AuthenticateInputValues\
 **What it does**: Authenticate the feature input keyed in by the user and prompt the user to input the feature information in a certain format if incorrect\
 **Inputs**: Feature values  
 **Outputs**: Boolean and if output is false send an alert to the user to re-enter values
  
-## Subcomponent 2:
+# Subcomponent 2:
 **Name**: PredictionBlock\
 **What it does**: Provides prediction for the given values by the user input using the best model selected from the training and validation step.\
 **Inputs**: Feature values in the correct format  
@@ -25,13 +25,13 @@
 **Inputs**: Electronic records data frame  
 **Output**: Pickle object that contains the feature weights of the robust model 
 
-## Subcomponent 1: 
+# Subcomponent 1: 
 **Name**: TrainModel\
 **What it does**: Train 5 models such as XGBoost, Random Forest, Lasso, Elastic Net, Ridge on the train dataset\
 **Inputs**: Training dataset that is a data frame consisting of individual patient records with patient and physician characteristics  
 **Outputs**: Trained model with feature weights
 
-## Subcomponent 2:
+# Subcomponent 2:
 **Name**: Evaluation\
 **What it does**: Evaluate the 5 models on the validation set and compare their AUC to get a robust model\
 **Inputs**: Model features from the training module and validation data frame  
