@@ -1,3 +1,5 @@
+<img width="612" alt="component1" src="https://github.com/ML4CEA/CEATestingModel/assets/62965045/97a9a691-fb77-465d-a55c-ae974ba6d99a">
+
 ## Big component
 **Name**: Userinterface\
 **What it does**: This is the interface that interacts with the user (Clinician/ Physician) to get the input values of the features for the prediction model\
@@ -16,6 +18,8 @@
 **Inputs**: Feature values in the correct format  
 **Output**: Predicted CEA test value obtained from the model.
 
+
+<img width="612" alt="component2" src="https://github.com/ML4CEA/CEATestingModel/assets/62965045/1c151c67-651f-4632-a218-1bd481a85f03">
 
 ## Big Component:
 **Name**: Model training and validation\
@@ -37,7 +41,7 @@
 
 ## Big Component
 **Name**: Data processing\ 
-**What it does**: Cleaning the data frame in order to train and validate five different models.\
+**What it does**: Cleaning the data frame in order to train and validate five different models\
 **Inputs**: Raw data frame  
 **Output**: Clean data frame
 
