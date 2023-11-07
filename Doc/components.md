@@ -1,4 +1,5 @@
 <img width="612" alt="component1" src="https://github.com/ML4CEA/CEATestingModel/assets/62965045/97a9a691-fb77-465d-a55c-ae974ba6d99a">
+<img width="612" alt="component2" src="https://github.com/ML4CEA/CEATestingModel/assets/62965045/1c151c67-651f-4632-a218-1bd481a85f03">
 
 ## Big component
 **Name**: Userinterface\
@@ -17,9 +18,6 @@
 **What it does**: Provides prediction for the given values by the user input using the best model selected from the training and validation step.\
 **Inputs**: Feature values in the correct format  
 **Output**: Predicted CEA test value obtained from the model.
-
-
-<img width="612" alt="component2" src="https://github.com/ML4CEA/CEATestingModel/assets/62965045/1c151c67-651f-4632-a218-1bd481a85f03">
 
 ## Big Component:
 **Name**: Model training and validation\
