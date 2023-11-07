@@ -20,12 +20,12 @@ Physicians will be using this to cater to their colorectal cancer patients needs
 ## Use cases/Functional Design
 
 ### Policy analyst/Physicians
-**What information does the user provide?** Provide value for needed features 
+**What information does the user provide?** Provide value for needed features  
 **What responses do the system provide?** Getting the likelihood of colorectal patients visiting clinics/CEA testing 
 
 
 ### Researchers
-**What information does the user provide?** Their specific dataset 
+**What information does the user provide?** Their specific dataset  
 **What responses do the system provide?** Based on the data, predicting the best model to use 
 
 
