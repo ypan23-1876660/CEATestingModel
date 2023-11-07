@@ -1,14 +1,14 @@
 ## Big component
-**Name**: Userinterface
-**What it does**: This is the interface that interacts with the user (Clinician/ Physician) to get the input values of the features for the prediction model
-**Inputs**: Feature values
-**Outputs**: Likelihood (prediction outcomes)
+**Name**: Userinterface\
+**What it does**: This is the interface that interacts with the user (Clinician/ Physician) to get the input values of the features for the prediction model\
+**Inputs**: Feature values\
+**Outputs**: Likelihood (prediction outcomes)\
 
 ## Subcomponent 1
-**Name**: AuthenticateInputValues
-**What it does**: Authenticate the feature input keyed in by the user and prompt the user to input the feature information in a certain format if incorrect
-**Inputs**: Feature values 
-**Outputs**: Boolean and if output is false send an alert to the user to re-enter values 
+**Name**: AuthenticateInputValues\
+**What it does**: Authenticate the feature input keyed in by the user and prompt the user to input the feature information in a certain format if incorrect\
+**Inputs**: Feature values\ 
+**Outputs**: Boolean and if output is false send an alert to the user to re-enter values\ 
  
 ## Subcomponent 2:
 **Name**: PredictionBlock
