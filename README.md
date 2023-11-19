@@ -2,15 +2,15 @@
 Identify patient and physician characteristics that predict a patient's likelihood of being tested in the next three months
 
 **Collborators:**
-Echo Ron </b>
-Mahima </b>
-Anuradha </b>
-Janet Pan </b>
+Echo Ron <br>
+Mahima <br>
+Anuradha <br>
+Janet Pan <br>
 
 
  # How to use
  
- 1. Download all the files into the local `/data` folder:
+ 1. Download all the files into the local `/data` folder: <br>
  **Do not push the `/data` folder to Github**
     - Pateint CEA testing: data/deid_cea_v2.csv
     - Patient information: Final dataset prep_072521.csv
