@@ -11,7 +11,6 @@ Janet Pan <br>
  # How to use
  
  1. Download all the files into the local `/data` folder: <br>
- <br>
  **Do not push the `/data` folder to Github!**
     - Pateint CEA testing: data/deid_cea_v2.csv
     - Patient information: Final dataset prep_072521.csv
