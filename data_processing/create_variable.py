@@ -1,15 +1,17 @@
 import pandas as pd
 import numpy as np
-import os
+#import os
 
-### OUTPU: 'META' DATAFRAME FOR THE FOLLOWING STPES
+### OUTPUT: 'META' DATAFRAME FOR THE FOLLOWING STPES
 
 ## load in data 
 patient_visit = pd.read_csv("../data/deid_cea_v2.csv") # Patient revisit after surveillance 
 patient_meta = pd.read_csv("../data/Final dataset prep_072521.csv") # All features data
 
+
 ## Merging patient visit and patient meta
-meta = patient_meta.merge(patient_visit,on="PID", how='outer').sort_index()
+def data_processing(patient_visit, patient_meta, physician_data):
+    meta = patient_meta.merge(patient_visit,on="PID", how='outer').sort_index()
 
 ## Merging patient visit and patient meta
 meta = patient_meta.merge(patient_visit,on="PID", how='outer').sort_index()
@@ -22,10 +24,11 @@ meta['value1'] = pd.to_numeric(meta['value1'], errors = 'coerce')
 
 ## Creating all variables 
 # How long from the start of surveillance
-meta['days_from_surveil'] = meta['dx2cea'] - meta['dx2surveildate'] 
+   meta['days_from_surveil'] = meta['dx2cea'] - meta['dx2surveildate'] 
 
 # How long from the previous visit
 meta['days_from_last_visit'] = meta['dx2cea'].diff() 
+
 
 # How long from the start of surveillance to their first visit
 meta['first_visit_from_surveil'] = meta.groupby('PID').head(1)['dx2cea'] - meta.groupby('PID').head(1)['dx2surveildate']
@@ -37,5 +40,15 @@ meta['cea_prev_visit'] = meta['value1'].shift(1)
 # If CEA value >5, then higher chance of reoccurrence
 meta['chances_of_recur'] = np.where(meta['value1'] > 5, 1, 0)
 
-# Patient revisits every 90 days 
+
+    # Patient revisits every 90 days 
 meta['return_visit'] = np.where(meta.groupby('PID')['dx2cea'].diff() <= 90, 1, 0)
+
+
+return(meta)
+
+
+data_processing(patient_visit, patient_meta, physician_data)
+                
+
+# Merge physical characteristics by physid, merge by meta 
