@@ -6,14 +6,14 @@ from functools import reduce
 
 ### OUTPUT: 'META' DATAFRAME FOR THE FOLLOWING STPES
 
-## Merging patient visit and patient meta
-def create_var(patient_visit, patient_meta):
+## Merging patient visit and patient info
+def create_var(patient_visit, patient_info):
     '''A function that takes in deid_cea_v2.csv and Final dataset prep_072521.csv to
     create all necessary variables. 
     Input those the two files and will return a combined file with all the new variables.
     '''
     ## Merging patient visit and patient meta
-    df = patient_meta.merge(patient_visit,on="PID", how='outer').sort_index()
+    df = patient_info.merge(patient_visit,on="PID", how='outer').sort_index()
 
     ## Creating all variables 
     # How long from the start of surveillance
@@ -27,7 +27,7 @@ def create_var(patient_visit, patient_meta):
     df['first_visit_from_surveil'] = df['first_visit_from_surveil'].ffill()
 
     # CEA value from previous visit 
-    df['cea_prev_visit'] = df['value1'].shift(1)
+    df['cea_prev_visit'] = df['value'].shift(1)
     
     # If CEA value >5, then higher chance of reoccurrence
     # First creating new value variable (value1) to convert all values into numeric to perform logic 
@@ -60,3 +60,4 @@ def combine_physid(directory, pattern):
     # Concatenate all DataFrames in the list into a single DataFrame
     combined_data = reduce(lambda x, y: pd.merge(x, y, on = 'physid'), dataframes)
     return combined_data
+
