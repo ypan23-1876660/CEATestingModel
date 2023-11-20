@@ -17,7 +17,7 @@ Janet Pan <br>
     - Physician data: died_md_specialty_v1.csv, deid_md_dep_v1.csv, deid_md_edu_v1.csv, deid_md_main_v1.csv
     
    
- 2. Run `data_processing/create_variable.py` to generate the dataframe that included all the new variables
+ 2. Run `python main.py` to generate the dataframe `patient_phys_info.csv` that includes all the patient information, new patient variables, and physician characteristics. 
 
 
  
