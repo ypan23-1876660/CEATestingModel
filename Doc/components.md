@@ -21,13 +21,13 @@
 
 # Big Component:
 **Name**: Model training and validation\
-**What it does**: 5 models are trained on the clean dataset and the performance of the model is evaluated on the validation dataset to ascertain the model with the best performance and preserve the best model with its feature weights for future predictions.\
+**What it does**: Up to two models are trained on the clean dataset and the performance of the model is evaluated on the validation dataset to ascertain the model with the best performance and preserve the best model with its feature weights for future predictions.\
 **Inputs**: Electronic records data frame  
 **Output**: Pickle object that contains the feature weights of the robust model 
 
 ## Subcomponent 1: 
 **Name**: TrainModel\
-**What it does**: Train 5 models such as XGBoost, Random Forest, Lasso, Elastic Net, Ridge on the train dataset\
+**What it does**: Train up to two models such as XGBoost and Lasso on the train dataset\
 **Inputs**: Training dataset that is a data frame consisting of individual patient records with patient and physician characteristics  
 **Outputs**: Trained model with feature weights
 
@@ -39,7 +39,7 @@
 
 # Big Component
 **Name**: Data processing\ 
-**What it does**: Cleaning the data frame in order to train and validate five different models\
+**What it does**: Cleaning the data frame in order to train and validate up to two different models\
 **Inputs**: Raw data frame  
 **Output**: Clean data frame
 
