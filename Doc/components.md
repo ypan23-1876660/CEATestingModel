@@ -33,7 +33,7 @@
 
 ## Subcomponent 2:
 **Name**: Evaluation\
-**What it does**: Evaluate the 5 models on the validation set and compare their AUC to get a robust model\
+**What it does**: Evaluate the models on the validation set and compare their AUC to get a robust model\
 **Inputs**: Model features from the training module and validation data frame  
 **Outputs**: AUC metric for each model and save only the robust model
 
