@@ -91,6 +91,7 @@ phys_meta = combine_physid(directory_path, physid_pattern)
 patient_phys_info = patient.merge(phys_meta, how="left", left_on="physid_x", right_on="physid").drop(columns=['physid_x', 'physid_y']) # use "patient_phys_info" dataframe to continue working in dataframe
 patient_phys_info.to_csv("./data/patient_phys_info.csv") # use "patient_phys_info.csv" to read in the information and continue working in another file
 
+patient_phys_info.head()
 ### Clean up Nans
 ### Model
 ### Model fitting
