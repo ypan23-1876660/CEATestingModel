@@ -1,4 +1,4 @@
-"""This is a test module which holds two smoke test"""
+"""This is a test module which holds two smoke test and six oneshot tests"""
 
 from functools import reduce
 import glob
