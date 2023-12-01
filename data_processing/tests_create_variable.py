@@ -18,7 +18,7 @@ class TestCreateVar(unittest.TestCase):
         result = create_var(patient_visit, patient_info)
         self.assertIsNotNone(result)
 
-class TestCombinePhysid(unittest.TestCase):
+
     """Running unittest on combine_physid"""
     def test_combine_physid(self):
         """Somke test: ensuring the dataframe is created"""
@@ -26,4 +26,6 @@ class TestCombinePhysid(unittest.TestCase):
         pattern = ("*md*.csv")
         result = combine_physid(directory, pattern)
         self.assertIsNotNone(result)
-        
+
+if __name__ == '__main__':
+    unittest.main()
