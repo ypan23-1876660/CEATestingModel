@@ -1,13 +1,13 @@
 """This is a test module which holds two smoke test and six oneshot tests"""
 
+from create_variable import create_var
+from create_variable import combine_physid
 from functools import reduce
 import glob
 import pandas as pd
 import numpy as np
 import os
 import unittest 
-from create_variable import create_var
-from create_variable import combine_physid
 
 class TestCreateVar(unittest.TestCase):
     """Running unittest on create_var"""
