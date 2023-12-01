@@ -8,4 +8,4 @@ dependencies:
   - pandas=2.1.1
   - python=3.10.0
   - scikit-learn=1.3.2
-prefix: /Users/ypan23/anaconda3/envs/ml4cea
+prefix: /Users/anaconda3/envs/ml4cea
