@@ -131,7 +131,6 @@ def encode_df(patient_phys_info):
     binary_map = {'Y': 1, "N": 0}
     for column in binary_columns:
         data_encoded[column] = data_encoded[column].map(binary_map)
-
     data_encoded.to_csv("../data/structured_info.csv")
 
 
