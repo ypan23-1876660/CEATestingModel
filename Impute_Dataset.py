@@ -144,3 +144,4 @@ df_filled_mode = df_removed.fillna(df_removed.mode().iloc[0])
 df_filled_mode.isnull().values.any()
 
 
+
