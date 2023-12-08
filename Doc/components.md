@@ -15,27 +15,27 @@
  
 ## Subcomponent 2:
 **Name**: PredictionBlock\
-**What it does**: Provides prediction for the given values by the user input using the best model selected from the training and validation step.\
+**What it does**: Provides prediction for the given values by the user input using the lasso model from the training and validation step.\
 **Inputs**: Feature values in the correct format  
 **Output**: Predicted CEA test value obtained from the model.
 
 # Big Component:
 **Name**: Model training and validation\
-**What it does**: Up to two models are trained on the clean dataset and the performance of the model is evaluated on the validation dataset to ascertain the model with the best performance and preserve the best model with its feature weights for future predictions.\
+**What it does**: Train lasso on the clean dataset and evaluate the performance of the model on the validation dataset to ascertain the features that best predict patient visits.\
 **Inputs**: Electronic records data frame  
 **Output**: Pickle object that contains the feature weights of the robust model 
 
 ## Subcomponent 1: 
 **Name**: TrainModel\
-**What it does**: Train up to two models such as XGBoost and Lasso on the train dataset\
+**What it does**: Train Lasso on the train dataset\
 **Inputs**: Training dataset that is a data frame consisting of individual patient records with patient and physician characteristics  
 **Outputs**: Trained model with feature weights
 
 ## Subcomponent 2:
 **Name**: Evaluation\
-**What it does**: Evaluate the models on the validation set and compare their AUC to get a robust model\
+**What it does**: Evaluate the model on the validation set and evaluate it using AUC\
 **Inputs**: Model features from the training module and validation data frame  
-**Outputs**: AUC metric for each model and save only the robust model
+**Outputs**: AUC metric for lasso
 
 # Big Component
 **Name**: Data processing\ 
