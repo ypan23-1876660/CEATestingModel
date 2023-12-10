@@ -4,17 +4,37 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import pickle
+import os
 
 
 def load_data(data_path):
-    patient_phy_data = pd.read_csv(data_path)
-    patient_phy_data.drop(['Unnamed: 0'], axis = 1, inplace=True)
-    return patient_phy_data
+    if os.path.exists(data_path):
+        patient_phy_data = pd.read_csv(data_path)
+        patient_phy_data.drop(['Unnamed: 0'], axis = 1, inplace=True)
+        return patient_phy_data
+    else:
+        raise ValueError(f"This file {data_path} does not exist.")
+
 
 
 def feature_select(patient_phy_data):
     predictors = ['days_from_last_visit', 'days_from_surveil', 'first_visit_from_surveil', 'cea_prev_visit', 'chances_of_recur']
     response = ['return_visit']
+    
+    # checking if all the predictors are present in patient_phy_data
+    missing_predictors = [col for col in predictors if col not in patient_phy_data.columns]
+    if missing_predictors:
+        raise ValueError(f"The following predictors are missing in the dataset: {', '.join(missing_predictors)}")
+    else:
+        pass 
+    
+    # checking if the response is present in patient_phy_data
+    missing_response = [col for col in response if col not in patient_phy_data.columns]
+    if missing_response:
+        raise ValueError(f"The respomse is missing in the dataset: {', '.join(missing_response)}")
+    else:
+        pass
+    
     X = patient_phy_data[predictors] 
     y = patient_phy_data[response]
     print(X.shape)
