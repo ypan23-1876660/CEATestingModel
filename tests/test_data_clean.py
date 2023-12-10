@@ -48,5 +48,3 @@ class TestEncode_df(unittest.TestCase):
     def test_encode_df(self):
         result = encode_df(df)
         self.assertIsNotNone(result)
-        
-        
