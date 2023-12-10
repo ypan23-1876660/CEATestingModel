@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import os
 import unittest 
+from ml4cea import create_var, combine_physid
 
 class TestCreateVar(unittest.TestCase):
     """Running unittest on create_var"""
@@ -85,4 +86,3 @@ class TestCombinePhysid(unittest.TestCase):
         pattern = ("*md*.csv")
         result = combine_physid(directory, pattern)
         self.assertIsNotNone(result)
-        

@@ -1,8 +1,10 @@
+"""
+Step 2: 
+"""
 import numpy as np
 import pandas as pd
 
-
-from create_variable import create_var, combine_physid
+from ml4cea.create_variable import create_var, combine_physid
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import MinMaxScaler
 
@@ -10,8 +12,10 @@ from sklearn.preprocessing import MinMaxScaler
 def data_impute(patient_dataframe):
     """
     Selecting columns in dataframe that are needed for the analysis
-    Input: patient_dataframe (the patient_info and patient_visit merged dataframe) -of shape (76018,183)
-    Output: Dataframe of shape (76018,33)
+    Input:
+        patient_dataframe (the patient_info and patient_visit merged dataframe) -of shape: (number of patient, number of features)
+    Output:
+        Dataframe of shape (76018,33)
     """
     #note: since chances_of_recur is created based on value1 column, I'm not including that as a feature
     cols_to_select = ['PID', 'medctr2', 'age_deid', 'female', 'raceeth', 'partnered', 'lang', 'ins_medicare','ins_medicaid','ins_privatepay','ins_commercial','ins_other','charlson_wt',
@@ -62,6 +66,23 @@ def clean_rename_patPhyInfo(patient_phys_info):
     patient_phys_info.drop(['MEDCTR','JOB_TITLE', 'PID', 'physid'], axis = 1, inplace = True)
     return patient_phys_info
 
+def get_min_max_train(phys_patient_info):
+    '''
+    A function that gets the minumum and maximum values for all the 
+    features for scaling
+    : param phys_patient_info: pandas.DataFrame
+        Combined and cleaned patient and phycisian information
+    : return: numpy array
+        min_train: minimum value for all the features 
+        max_train: maximum value for all the features 
+    '''
+    predictors = ['days_from_last_visit', 'days_from_surveil', 'first_visit_from_surveil', 'cea_prev_visit', 'chances_of_recur']
+    df = phys_patient_info[predictors]
+    max_train = df.max(axis=0)
+    min_train = df.min(axis=0)
+    np.save("data/max_train.npy", max_train)
+    np.save("data/min_train.npy", min_train)
+
 def scale_patPhyInfo(patient_phys_info):
     """
     Scaling the categorical columns to be between 0 and 1 
@@ -72,6 +93,7 @@ def scale_patPhyInfo(patient_phys_info):
     continuous_columns = get_continous_columns(patient_phys_info)
     # Extract continuous columns from the DataFrame
     continuous_data = patient_phys_info[continuous_columns]
+
     # Use MinMaxScaler to standardize between 0 and 1
     scaler = MinMaxScaler()
     scaled_data = scaler.fit_transform(continuous_data)
@@ -86,8 +108,9 @@ def scale_patPhyInfo(patient_phys_info):
     # Combine the non-continuous columns with the scaled continuous columns
     #Shape of patient_phys_info_scaled is (447057, 50)
     patient_phys_info_scaled = pd.concat([patient_phys_info.drop(columns=continuous_columns).reset_index(drop=True), scaled_df.reset_index(drop=True)], axis=1)
-    
+
     return patient_phys_info_scaled
+
 
 def encode_df(patient_phys_info):
 
@@ -131,50 +154,25 @@ def encode_df(patient_phys_info):
     binary_map = {'Y': 1, "N": 0}
     for column in binary_columns:
         data_encoded[column] = data_encoded[column].map(binary_map)
-    data_encoded.to_csv("../data/structured_info.csv")
+    
+    return data_encoded
+    #data_encoded.to_csv("../data/structured_info.csv")
 
 
-if __name__ == "__main__":
-    patient_visit = pd.read_csv("../data/deid_cea_v2.csv") # Patient revisit after surveillance 
-    patient_info = pd.read_csv("../data/Final dataset prep_072521.csv") # All features data
-    #patient shape is (76018,183)
-    #Since there are few patients with 'value' == <1.0. Since our model cannot handle strings, I'm replacing <1.0 to 0.9 arbitrarily.
-    val_to_replace = {'<1.0':'0.9', '< 1.0':'0.9', '>1500.00': '1500.1', '> 15000':'15001', '>15000.0':'15001'}
-    patient_visit['value'] = patient_visit['value'].replace(val_to_replace)
-    patient_visit['value'] = pd.to_numeric(patient_visit['value'])
-    patient = create_var(patient_visit, patient_info)
-    
-    #patient_df_reduced shape is (76018,33)
-    patient_df_reduced = data_impute(patient)
-    #print(f"Shape of imputed patient_info data is {patient_df_reduced.shape}")
-
-    # Read in physician data and combine all physician data
-    directory_path = "../data/"
-    physid_pattern = "*md*.csv"
-    #Shape of phys_meta data is (76570, 27)
-    phys_meta = combine_physid(directory_path, physid_pattern)
-    #print(f"Shape of phys_meta data is {phys_meta.shape}")
-    
-    # Combine patient_meta and physician_meta to create a meta file for downstream
-    #Shape of merged patient_phys_info is (569781, 58)
-    patient_phys_info = patient_df_reduced.merge(phys_meta, how="left", left_on="physid_x", right_on="physid").drop(columns=['physid_x', 'physid_y']) # use "patient_phys_info" dataframe to continue working in dataframe
-    #print(f"Shape of merged patient_phys_info is {patient_phys_info.shape}")
-    
-    #Shape of cleaned and renamed patient_phys_info is (569781, 54)
+def export_df(patient_phys_info):
+    """
+    This funtion combines all the functions for data processing and 
+    preparing for modeling 
+    """
+    # Clean and prepare dataframe for model fitting
     patient_phys_info = clean_rename_patPhyInfo(patient_phys_info)
-    #print(f"Shape of cleaned and renamed patient_phys_info is {patient_phys_info.shape}")
-
-    #Shape of patient_phys_info after removing nan is (447057, 50)
     patient_phys_info = remove_nan(patient_phys_info) 
-    #print(f"Shape of patient_phys_info after removing nan is {patient_phys_info.shape}")
-    
-    #Scaling continuous columns between 0 and 1
-    #Shape of patient_phys_info_scaled is (447057, 50)
+
+    # Get the min and max values for min_max_scaling 
+    get_min_max_train(patient_phys_info)
+
+    # Scale the values 
     patient_phys_info_scaled = scale_patPhyInfo(patient_phys_info)
-    #print(f"Shape of patient_phys_info_scaled is {patient_phys_info_scaled.shape}")
-    
-    #Encoding categorical columns
-    #Shape of encoded data, (447057, 192)
-    encode_df(patient_phys_info_scaled)
-    
-    
+
+    # Encode the dataframe 
+    return encode_df(patient_phys_info_scaled)
