@@ -3,6 +3,7 @@ Step 2:
 """
 import numpy as np
 import pandas as pd
+import os 
 
 from ml4cea.create_variable import create_var, combine_physid
 from sklearn.preprocessing import OneHotEncoder
@@ -66,7 +67,7 @@ def clean_rename_patPhyInfo(patient_phys_info):
     patient_phys_info.drop(['MEDCTR','JOB_TITLE', 'PID', 'physid'], axis = 1, inplace = True)
     return patient_phys_info
 
-def get_min_max_train(phys_patient_info):
+def get_min_max_train(phys_patient_info, output_path = 'data/default_output/'):
     '''
     A function that gets the minumum and maximum values for all the 
     features for scaling
@@ -80,8 +81,12 @@ def get_min_max_train(phys_patient_info):
     df = phys_patient_info[predictors]
     max_train = df.max(axis=0)
     min_train = df.min(axis=0)
-    np.save("data/max_train.npy", max_train)
-    np.save("data/min_train.npy", min_train)
+
+    # Saving max_train.npy and min_train.npy to output folders 
+    max_train_path = os.path.join(output_path, "max_train.npy")
+    min_train_path = os.path.join(output_path, "min_train.npy")
+    np.save(max_train_path, max_train)
+    np.save(min_train_path, min_train)
 
 def scale_patPhyInfo(patient_phys_info):
     """
@@ -159,7 +164,7 @@ def encode_df(patient_phys_info):
     #data_encoded.to_csv("../data/structured_info.csv")
 
 
-def export_df(patient_phys_info):
+def export_df(patient_phys_info, output_path):
     """
     This funtion combines all the functions for data processing and 
     preparing for modeling 
@@ -169,7 +174,7 @@ def export_df(patient_phys_info):
     patient_phys_info = remove_nan(patient_phys_info) 
 
     # Get the min and max values for min_max_scaling 
-    get_min_max_train(patient_phys_info)
+    get_min_max_train(patient_phys_info, output_path)
 
     # Scale the values 
     patient_phys_info_scaled = scale_patPhyInfo(patient_phys_info)

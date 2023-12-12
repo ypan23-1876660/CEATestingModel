@@ -2,23 +2,10 @@
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
-import numpy as np
 import pandas as pd
+import numpy as np
 import pickle
-import os
-
-
-
-
-
-
-def load_data(data_path):
-    if os.path.exists(data_path):
-        patient_phy_data = pd.read_csv(data_path)
-        patient_phy_data.drop(['Unnamed: 0'], axis = 1, inplace=True)
-        return patient_phy_data
-    else:
-        raise ValueError(f"This file {data_path} does not exist.")
+import os 
 
 
 def feature_select(patient_phy_data):
@@ -45,20 +32,20 @@ def feature_select(patient_phy_data):
     return X_train, y_train
 
 
-def model_train(X_train,y_train, model_path = 'data/model.pkl'):
+def model_train(X_train,y_train, model_path = 'data/default_output/model.pkl'):
     model_cv = LogisticRegressionCV(Cs=[0.001, 0.01, 0.1, 1, 10], cv=5, solver='liblinear')
     model_cv.fit(X_train,y_train.values.ravel())
-    min_train = np.load("../data/min_train.npy")
-    max_train = np.load("../data/max_train.npy")
-    output = {"model": model_cv,
-              "min_train": min_train,
-              "max_train": max_train
-              }
+    # min_train = np.load("data/min_train.npy")
+    # max_train = np.load("data/max_train.npy")
+    # output = {"model": model_cv,
+    #           "min_train": min_train,
+    #           "max_train": max_train
+    #           }
     with open (model_path, 'wb') as file:
-        pickle.dump(output, file)
+        pickle.dump(model_cv, file)
         # pickle.dump(model_cv, file)
 
-def scaling_test_features(predict_df, max_train, min_train):
+def scaling_test_features(predict_df, output_path = 'data/default_output/'):
     """
     Scale test features by MinMaxScaler.
 
@@ -69,6 +56,10 @@ def scaling_test_features(predict_df, max_train, min_train):
     """
     data = predict_df.to_numpy()
     columns = predict_df.columns.tolist()
+    max_train_path = os.path.join(output_path, "max_train.npy")
+    min_train_path = os.path.join(output_path, "min_train.npy")
+    max_train = np.load(max_train_path)
+    min_train = np.load(min_train_path)
 
     def MinMaxScalerByValue(X, max_train, min_train):
         X_std = (X - min_train) / (max_train - min_train)
@@ -83,6 +74,5 @@ def scaling_test_features(predict_df, max_train, min_train):
 
 
 def model_create(structured_info, model_path):
-    #import pdb; pdb.set_trace()
     X_train, y_train = feature_select(structured_info)
     model_train(X_train, y_train, model_path)

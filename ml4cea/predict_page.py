@@ -8,12 +8,12 @@ import streamlit as st
 import sys
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-sys.path.append("../Models/")
-sys.path.append("../data/")
+#sys.path.append("../Models/")
+#sys.path.append("../data/")
 from ml4cea.model import scaling_test_features
 
 
-def show_predict_page(model, max_train, min_train):
+def show_predict_page(model, output_path):
     """
     Show the website for predicting if the patient is likely to come back for return visit within the next three months. 
     return: 0: The patient is not likely to come back for the return visit 
@@ -40,7 +40,7 @@ def show_predict_page(model, max_train, min_train):
     ok = st.button("Predict")
 
     if ok:
-        predict_df_scaled = scaling_test_features(predict_df, max_train, min_train)
+        predict_df_scaled = scaling_test_features(predict_df, output_path)
         chance_of_return = model.predict(predict_df_scaled)
         if chance_of_return[0] == 1:
             st.subheader(f"The patient is likely to come back for the return visit")
