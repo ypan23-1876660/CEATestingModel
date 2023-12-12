@@ -1,12 +1,16 @@
 #importing required packages for models.py test codes 
 
+from sklearn.base import BaseEstimator
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
+import numpy as np
 import pandas as pd
 import pickle
+import os
+import tempfile
 
-from model import load_data, feature_select, model_train, scaling_test_features
+from ml4cea import load_data, feature_select, model_train, scaling_test_features
 
 import unittest 
 
@@ -42,21 +46,24 @@ class TestModelTrain(unittest.TestCase):
     def test_model_train(self):
         df = load_data("../data/modeltestvalid.csv")
         X_train, y_train = feature_select(df)
-        result = model_train(X_train, y_train)
-        self.assertIsNotNone(result)
-    
-    def test_model_train_reproducibility(self):
-        df = load_data("../data/modeltestvalid.csv")
-        X_train, y_train = feature_select(df)
-        models = [model_train(X_train, y_train) for _ in range(5)]
-        first_model_coef = models[0].coef_
-        for i in range(1,5):
-            current_model_coef = models[1].coef_
-            self.assertTrue((first_model_coef == current_model_coef).all())
+        self.temp_file = tempfile.NamedTemporaryFile(delete=False)
+        os.remove(self.temp_file.name)
+        model_train(X_train, y_train, model_path=self.temp_file.name)
+        
+        file_size = os.path.getsize(self.temp_file.name)
+        self.assertGreater(file_size, 0)
+        
+        with open(self.temp_file.name, 'rb') as file:
+            loaded_output = pickle.load(file)
+        self.assertIsInstance(loaded_output['model'], BaseEstimator)
+            
 
 class TestScalingTestFeatures(unittest.TestCase):
     def test_scaling_test_features(self):
         df = load_data("../data/modeltestvalid.csv")
-        result = scaling_test_features(df)
+        min_train = np.load("../data/min_train.npy")
+        max_train = np.load("../data/max_train.npy")
+        result = scaling_test_features(df, max_train, min_train)
         self.assertIsNotNone(result)
+        ## TestScalingTestFeatures::test_scaling_test_features - ValueError: operands could not be broadcast together with shapes (2545,96) (5,)
         

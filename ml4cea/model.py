@@ -2,9 +2,12 @@
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
-import pandas as pd
 import numpy as np
+import pandas as pd
 import pickle
+import os
+
+
 
 
 
@@ -45,8 +48,8 @@ def feature_select(patient_phy_data):
 def model_train(X_train,y_train, model_path = 'data/model.pkl'):
     model_cv = LogisticRegressionCV(Cs=[0.001, 0.01, 0.1, 1, 10], cv=5, solver='liblinear')
     model_cv.fit(X_train,y_train.values.ravel())
-    min_train = np.load("data/min_train.npy")
-    max_train = np.load("data/max_train.npy")
+    min_train = np.load("../data/min_train.npy")
+    max_train = np.load("../data/max_train.npy")
     output = {"model": model_cv,
               "min_train": min_train,
               "max_train": max_train
