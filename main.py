@@ -16,6 +16,7 @@ PATH = "data/"
 PATIENT_VISTI = "deid_cea_v2.csv"
 PATIENT_INFOR = "Final dataset prep_072521.csv"
 MODEL_NAME = "model.pkl"
+MODEL_PATH = os.path.join(PATH, MODEL_NAME)
 do_train = True # Change to False if want to use different data 
 # --------------------------- #
 
@@ -37,11 +38,9 @@ if do_train:
 
     # Export proessed dataframe for modeling 
     cleaned_patient_phys_info = export_df(patient_phys_info)
-
-MODEL_PATH = os.path.join(PATH, MODEL_NAME)
-
-# Fit model and save 
-model_create(cleaned_patient_phys_info, MODEL_PATH)
+    
+    # Fit model and save 
+    model_create(cleaned_patient_phys_info, MODEL_PATH)
 
 with open(MODEL_PATH, 'rb') as file:
     # model = pickle.load(file)
