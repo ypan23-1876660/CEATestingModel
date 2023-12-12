@@ -3,7 +3,6 @@
 *.pyc
 *Untitled.ipynb
 *untitled.txt
-data/
 *.ipynb
 *CEATestingModel
 *ml4cea.egg-info
