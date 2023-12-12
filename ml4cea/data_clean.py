@@ -181,4 +181,3 @@ def export_df(patient_phys_info, output_path):
 
     # Encode the dataframe 
     return encode_df(patient_phys_info_scaled)
-
