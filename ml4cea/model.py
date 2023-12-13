@@ -32,7 +32,7 @@ def feature_select(patient_phy_data):
     return X_train, y_train
 
 
-def model_train(X_train,y_train, model_path = 'data/default_output/model.pkl'):
+def model_train(X_train,y_train, model_path):
     model_cv = LogisticRegressionCV(Cs=[0.001, 0.01, 0.1, 1, 10], cv=5, solver='liblinear')
     model_cv.fit(X_train,y_train.values.ravel())
     # min_train = np.load("data/min_train.npy")
@@ -43,16 +43,18 @@ def model_train(X_train,y_train, model_path = 'data/default_output/model.pkl'):
     #           }
     with open (model_path, 'wb') as file:
         pickle.dump(model_cv, file)
-        # pickle.dump(model_cv, file)
+
 
 def scaling_test_features(predict_df, output_path = 'data/default_output/'):
     """
-    Scale test features by MinMaxScaler.
+    Scale test features by MinMaxScaler
 
-    Args:
-        - predict_df (pd.DataFrame): test dataframe with user info as columns
-    Returns:
-        - scaled_df (pd.DataFrame): test dataframe scaled by MinMaxScaler.
+    :param predict_df: pd.DataFrame
+        test dataframe with user info as columns
+    :param output_path: path
+        path where min_train.npy and max_train.npy is stored. Default is the default_output
+    returns: scaled_df: pd.DataFrame
+        test dataframe scaled by MinMaxScaler 
     """
     data = predict_df.to_numpy()
     columns = predict_df.columns.tolist()
@@ -67,8 +69,6 @@ def scaling_test_features(predict_df, output_path = 'data/default_output/'):
         return X_scaled
     scaled_data = MinMaxScalerByValue(data, max_train, min_train)
 
-    # scaler = MinMaxScaler()
-    # scaled_data = scaler.fit_transform(data)
     scaled_df = pd.DataFrame({columns[i]: scaled_data[:, i] for i in range(len(columns))})
     return scaled_df
 
