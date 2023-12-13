@@ -1,18 +1,18 @@
 import numpy as np
 import pandas as pd
 
-from create_variable import create_var, combine_physid
-from data_clean import data_impute, remove_nan, clean_rename_patPhyInfo, scale_patPhyInfo, encode_df
+from ml4cea import create_var, combine_physid
+from ml4cea import data_impute, remove_nan, clean_rename_patPhyInfo, scale_patPhyInfo, encode_df
 from sklearn.preprocessing import OneHotEncoder
 
 import unittest 
 
-patient_visit = pd.read_csv("../data/deid_cea_v2.csv")
-patient_info = pd.read_csv("../data/Final dataset prep_072521.csv")
+patient_visit = "data/deid_cea_v2.csv"
+patient_info = "data/Final dataset prep_072521.csv"
 patient = create_var(patient_visit, patient_info)
-directory = ("../data")
+directory = ("data")
 pattern = ("*md*.csv")
-phys = combine_physid(directory, pattern)
+phys = combine_physid(directory)
 df = patient.merge(phys, how="left", left_on="physid_x", right_on="physid").drop(columns=['physid_x', 'physid_y'])
 
 
