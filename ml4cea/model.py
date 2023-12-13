@@ -65,7 +65,8 @@ def feature_select(patient_phy_data):
 
 
 
-def model_train(X_train,y_train, model_path):
+def model_train(X_train,y_train, model_path = "data/default_output/model.pkl"):
+
     """
     Train a logistic regression model and save it to a specified file.
 
@@ -77,6 +78,7 @@ def model_train(X_train,y_train, model_path):
     Returns:
         - None
     """
+
     model_cv = LogisticRegressionCV(Cs=[0.001, 0.01, 0.1, 1, 10], cv=5, solver='liblinear')
     model_cv.fit(X_train, y_train.values.ravel())
     with open(model_path, 'wb') as file:
@@ -110,17 +112,7 @@ def scaling_test_features(predict_df, output_path='data/default_output/'):
     return scaled_df
 
 
-def model_create(structured_info, model_path):
-    """
-    Create and train a logistic regression model using structured information.
-
-    Args:
-        - structured_info (pd.DataFrame): DataFrame containing structured information.
-        - model_path (str): Path to save the trained model.
-
-    Returns:
-        - None
-    """
+def model_create(structured_info, model_path = "data/default_output/model.pkl"):
     X_train, y_train = feature_select(structured_info)
     model_train(X_train, y_train, model_path)
 
