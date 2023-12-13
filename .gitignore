@@ -12,3 +12,4 @@ dist
 *old*
 examples/*.png
 environment.yml
+__pycache__
