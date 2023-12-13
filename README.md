@@ -107,17 +107,18 @@ Examples for using the prediction portal can be found at ``examples/ folder``
 
 Background
 -------------
-Patients who have completed curative treatment for colorectal cancer (CRC) should be followed up for the development of recurrent disease and require surveillance for five years post-treatment. 
-
-Clinical guidelines: 
-    Suggest carcinoembryonic antigen (CEA) testing every three to six months
-Statement of the Problem: 
-    In practice, patients do not receive frequent testing
-Opportunity: 
-    Increase adherence to guideline-recommended testing; reduce cost
-Aim:  
-    - Identify patient and physician characteristics that predict a patient's likelihood of being tested in the next three months
-    - Build an interactive software system designed to help clinicians and policymakers with identifying patients for CEA testing using the model.
+Patients who have completed curative treatment for colorectal cancer (CRC) should be followed up for the development of recurrent disease and require surveillance for five years post-treatment. <br>
+<br>
+Clinical guidelines: <br>
+    Suggest carcinoembryonic antigen (CEA) testing every three to six months <br>
+Statement of the Problem: <br>
+    In practice, patients do not receive frequent testing <br>
+Opportunity: <br>
+    Increase adherence to guideline-recommended testing; reduce cost <br>
+Aim:  <br>
+    - Identify patient and physician characteristics that predict a patient's likelihood of being tested in the next three months <br>
+    - Build an interactive software system designed to help clinicians and policymakers with identifying patients for CEA testing using the model <br>
+<br>
 
 Data Source
 -------------
