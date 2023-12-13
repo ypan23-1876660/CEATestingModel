@@ -112,18 +112,15 @@ Examples for using the prediction portal can be found at ``examples/ folder``
 Background
 ----------
 
-Patients who have completed curative treatment for colorectal cancer (CRC) should be followed up for the development of recurrent disease and require surveillance for five years post-treatment. `<br>`
-`<br>`
-**Clinical guidelines**: Suggest carcinoembryonic antigen (CEA) testing every three to six months `<br>`
- `<br>`
-**Statement of the Problem**: In practice, patients do not receive frequent testing `<br>`
- `<br>`
-**Opportunity**: Increase adherence to guideline-recommended testing; reduce cost `<br>`
- `<br>`
-**Aim**:  `<br>`
-    - Identify patient and physician characteristics that predict a patient's likelihood of being tested in the next three months `<br>`
-    - Build an interactive software system designed to help clinicians and policymakers with identifying patients for CEA testing using the model `<br>`
-`<br>`
+Patients who have completed curative treatment for colorectal cancer (CRC) should be followed up for the development of recurrent disease and require surveillance for five years post-treatment. <br>
+<br>
+**Clinical guidelines**: Suggest carcinoembryonic antigen (CEA) testing every three to six months <br>
+**Statement of the Problem**: In practice, patients do not receive frequent testing <br>
+**Opportunity**: Increase adherence to guideline-recommended testing; reduce cost <br>
+**Aim**:  <br>
+    - Identify patient and physician characteristics that predict a patient's likelihood of being tested in the next three months <br>
+    - Build an interactive software system designed to help clinicians and policymakers with identifying patients for CEA testing using the model <br>
+<br>
 
 Data Source
 -----------
@@ -133,7 +130,7 @@ De-identified Kaiser Permanente Southern California EHR database
 Collborators:
 -------------
 
-Ron Dickerson `<br>`
-Mahima Joshi `<br>`
-Janet Pan `<br>`
-Anuradha Ramachandran `<br>`
+Ron Dickerson <br>
+Mahima Joshi <br>
+Janet Pan <br>
+Anuradha Ramachandran <br>
