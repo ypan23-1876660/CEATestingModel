@@ -68,7 +68,6 @@ class TestScalingTestFeatures(unittest.TestCase):
     def test_scaling_test_features(self):
         """Smoke test to make sure the function works."""
         df = load_data("data/modeltestvalid2.csv")
-        X = patient_phy_data[predictors] 
         result = scaling_test_features(df, output_path = 'data/default_output/')
         self.assertIsNotNone(result)
       
