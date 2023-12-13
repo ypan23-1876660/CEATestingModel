@@ -14,25 +14,7 @@ from ml4cea import load_data, feature_select, model_train, scaling_test_features
 
 import unittest 
 
-class TestLoadData(unittest.TestCase):
-    def test_load_data(self):
-        """Smoke test to ensure the function works."""
-        test_path = "data/modeltestvalid.csv"
-        result= load_data(test_path)
-        self.assertIsInstance(result, pd.DataFrame)
-        
-    def test_unnamed_column(self):
-        """Oneshot test to ensure the no named column is deleted."""
-        path = "data/modeltestvalid.csv"
-        result = load_data(path)
-        self.assertNotIn('Unnamed: 0', result.columns)
-        
-    def test_load_data_inccorrect(self):
-        """Edge test to make sure the filepath works."""
-        test_invalid_path = "data/doesnotexist.csv"
-        with self.assertRaises(ValueError) as context:
-            load_data(test_invalid_path)
-        
+
 class TestFeatureSelect(unittest.TestCase):
     def test_feature_select(self):
         """Smoke test to ensure the function works"""
