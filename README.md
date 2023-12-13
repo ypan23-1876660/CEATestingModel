@@ -13,7 +13,7 @@ Installation
 To install `ml4cea` you will need to begin by cloning `ml4cea` on your own computer by using the following `git` command:
 
 ```
-git clone [https://github.com/uwescience](https://github.com/ML4CEA/CEATestingModel.git)
+git clone https://github.com/ML4CEA/CEATestingModel.git
 ```
 
 Next, to install the package, run the `setup.py` file:
