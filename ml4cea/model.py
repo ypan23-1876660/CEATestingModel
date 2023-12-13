@@ -64,7 +64,8 @@ def feature_select(patient_phy_data):
     return X_train, y_train
 
 
-def model_train(X_train, y_train, model_path='data/default_output/model.pkl'):
+
+def model_train(X_train,y_train, model_path):
     """
     Train a logistic regression model and save it to a specified file.
 
@@ -84,14 +85,13 @@ def model_train(X_train, y_train, model_path='data/default_output/model.pkl'):
 
 def scaling_test_features(predict_df, output_path='data/default_output/'):
     """
-    Scale test features by MinMaxScaler.
-
-    Args:
-        - predict_df (pd.DataFrame): Test dataframe with user info as columns.
-        - output_path (str): Path to the output folder.
-
-    Returns:
-        - scaled_df (pd.DataFrame): Test dataframe scaled by MinMaxScaler.
+    Scale test features by MinMaxScaler
+    :param predict_df: pd.DataFrame
+        test dataframe with user info as columns
+    :param output_path: path
+        path where min_train.npy and max_train.npy is stored. Default is the default_output
+    returns: scaled_df: pd.DataFrame
+        test dataframe scaled by MinMaxScaler 
     """
     data = predict_df.to_numpy()
     columns = predict_df.columns.tolist()

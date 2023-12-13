@@ -1,5 +1,5 @@
 """
-Step 2: 
+Step 2: Clean and process the dataframes, select features for modeling
 """
 import numpy as np
 import pandas as pd
@@ -67,10 +67,9 @@ def clean_rename_patPhyInfo(patient_phys_info):
     patient_phys_info.drop(['MEDCTR','JOB_TITLE', 'PID', 'physid'], axis = 1, inplace = True)
     return patient_phys_info
 
-def get_min_max_train(phys_patient_info, output_path = 'data/default_output/'):
+def get_min_max_train(phys_patient_info, output_path):
     '''
-    A function that gets the minumum and maximum values for all the 
-    features for scaling
+    Aets the minumum and maximum values for all the features for scaling
     : param phys_patient_info: pandas.DataFrame
         Combined and cleaned patient and phycisian information
     : return: numpy array
