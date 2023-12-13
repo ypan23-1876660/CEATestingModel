@@ -7,3 +7,5 @@
 *CEATestingModel
 *ml4cea.egg-info
 scripts/model_predict_old.py
+build/
+dist
