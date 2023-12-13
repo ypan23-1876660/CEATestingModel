@@ -109,10 +109,10 @@ Examples for using the prediction portal can be found at ``examples/ folder``
 Collborators:
 -------------
 
-Ron Dickerson `<br>`
-Mahima Joshi `<br>`
-Janet Pan `<br>`
-Anuradha Ramachandran `<br>`
+Ron Dickerson <br>
+Mahima Joshi <br>
+Janet Pan <br>
+Anuradha Ramachandran <br>
 
 Contact
 -------
