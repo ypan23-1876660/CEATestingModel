@@ -18,21 +18,21 @@ import unittest
 class TestFeatureSelect(unittest.TestCase):
     def test_feature_select(self):
         """Smoke test to ensure the function works"""
-        df = load_data("data/modeltestvalid.csv")
+        df = "data/modeltestvalid.csv"
         X_train, y_train = feature_select(df)
         self.assertIsInstance(X_train, pd.DataFrame)
         self.assertIsInstance(X_train, pd.DataFrame)
     
     def test_fail_feature_select(self):
         """Edge test by adding a fail dataset to raise ValueError."""
-        df=load_data("data/modeltestfail.csv")
+        df="data/modeltestfail.csv"
         with self.assertRaises(ValueError) as context:
             feature_select(df)
 
 class TestModelTrain(unittest.TestCase):
     def test_model_train(self):
         """Smoke test to make sure the function works."""
-        df = load_data("data/modeltestvalid.csv")
+        df = "data/modeltestvalid.csv"
         X_train, y_train = feature_select(df)
         self.temp_file = tempfile.NamedTemporaryFile(delete=False)
         os.remove(self.temp_file.name)
@@ -43,13 +43,13 @@ class TestModelTrain(unittest.TestCase):
         
         with open(self.temp_file.name, 'rb') as file:
             loaded_output = pickle.load(file)
-        self.assertIsInstance(loaded_output['model'], BaseEstimator)
+        self.assertIsInstance(loaded_output, BaseEstimator)
             
 
 class TestScalingTestFeatures(unittest.TestCase):
     def test_scaling_test_features(self):
         """Smoke test to make sure the function works."""
-        df = load_data("data/modeltestvalid2.csv")
+        df = "data/modeltestvalid2.csv"
         min_train = np.load("data/default_output/min_train.npy")
         max_train = np.load("data/default_output/max_train.npy")
         result = scaling_test_features(df, min_train, max_train)
