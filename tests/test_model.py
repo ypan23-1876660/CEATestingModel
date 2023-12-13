@@ -68,7 +68,9 @@ class TestScalingTestFeatures(unittest.TestCase):
     def test_scaling_test_features(self):
         """Smoke test to make sure the function works."""
         df = load_data("data/modeltestvalid2.csv")
-        result = scaling_test_features(df)
+        min_train = np.load("data/default_output/min_train.npy")
+        max_train = np.load("data/default_output/max_train.npy")
+        result = scaling_test_features(df, min_train, max_train)
         self.assertIsNotNone(result)
       
         
