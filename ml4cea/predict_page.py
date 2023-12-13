@@ -8,8 +8,6 @@ import streamlit as st
 import sys
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-# sys.path.append("../Models/")
-# sys.path.append("../data/")
 from ml4cea.model import scaling_test_features
 
 

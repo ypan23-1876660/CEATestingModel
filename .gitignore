@@ -9,5 +9,6 @@
 scripts/model_predict_old.py
 build/
 dist
+*old*
 examples/*.png
 environment.yml

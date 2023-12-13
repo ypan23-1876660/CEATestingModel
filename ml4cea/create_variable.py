@@ -7,13 +7,11 @@ import os
 import glob
 from functools import reduce
 
-### OUTPUT: 'META' DATAFRAME FOR THE FOLLOWING STPES
-
-## Merging patient visit and patient info
 def create_var(patient_visit, patient_info):
     '''
     A function that merge deid_cea_v2.csv and Final dataset prep_072521.csv to
     create all necessary variables/features for ML model. 
+
     : param patient_visit: csv
         deid_cea_v2.csv in /data. This file contains the patient information including
         patient ID, CEA value, days from last visit, and physician ID. 
@@ -65,10 +63,9 @@ def create_var(patient_visit, patient_info):
 def combine_physid(directory):
     '''
     A function that merge all the files with physician information in /data 
+
     : param directory: path
         /data path in the repository
-    : param pattern: str 
-        All the files with "md" in the /data folder
     : return: merged pandas.DataFrame
         Combine all physicain information in to a meta dataframe
     '''

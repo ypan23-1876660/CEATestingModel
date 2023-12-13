@@ -1,5 +1,5 @@
 """
-Use the input data to train the model 
+This func
 """
 import os
 import pickle
@@ -7,12 +7,13 @@ from ml4cea import create_var, combine_physid, data_impute, export_df, model_cre
 
 # -------- USER INPUT ------- # 
 PATH = "data/"
-PATIENT_VISTI = "deid_cea_v2.csv" # default training data 
-PATIENT_INFOR = "Final dataset prep_072521.csv" # default training data
-OUTPUT_PATH = "data/default_output/" # Update this path if wanting to use other input data; default = default_output
-MODEL_NAME = "model.pkl" # update this name if want to use different name 
+PATIENT_VISTI = "deid_cea_v2.csv" 
+PATIENT_INFOR = "Final dataset prep_072521.csv" 
+OUTPUT_PATH = "data/user_output/"
+MODEL_NAME = "model.pkl" 
 MODEL_PATH = os.path.join(OUTPUT_PATH, MODEL_NAME)
 # --------------------------- #
+
 # create a new folder if using user data 
 if not os.path.exists(OUTPUT_PATH):
     os.makedirs(OUTPUT_PATH)
