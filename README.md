@@ -52,13 +52,15 @@ Folder structure
 
 Repository is structered as below. 
 
-Data merging and cleaning can be found under ml4cea/create_variable.py and ml4cea/data_clean.py.
+Data required for model training can be found under ``data``
 
-Model can be found under ml4cea/model.py.
+Data merging and cleaning can be found under ``ml4cea/create_variable.py`` and ``ml4cea/data_clean.py``.
 
-Tests can be found under tests folder.
+Model can be found under ``ml4cea/model.py``.
 
-Examples for using the prediction portal can be found at examples/ folder
+Tests can be found under ``tests`` folder.
+
+Examples for using the prediction portal can be found at ``examples/ folder``
 
 ```
 .
