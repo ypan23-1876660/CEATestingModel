@@ -1,11 +1,12 @@
 # ML4CEATesting
-Identify patient and physician characteristics that predict a patient's likelihood of being tested in the next three months
+Explore patient and physician characteristics that provide insights into the likelihood of a patient undergoing testing in the next three months.
+ML4CEATesting is an interactive software system designed to help clinicians identify patients for carcinoembryonic antigen (CEA) testing using a machine learning model.
 
 **Collborators:** <br>
-Echo Ron <br>
-Mahima <br>
-Anuradha <br>
+Ron Dickerson <br>
+Mahima Joshi <be>
 Janet Pan <br>
+Anuradha Ramachandran <br>
 
 
  # How to use
