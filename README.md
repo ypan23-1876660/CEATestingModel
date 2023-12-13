@@ -10,7 +10,7 @@ Janet Pan <br>
 
 Installation
 ------------
-To install `axwx` you will need to begin by cloning `axwx` on your own computer by using the following `git` command:
+To install `ml4cea` you will need to begin by cloning `ml4cea` on your own computer by using the following `git` command:
 
 ```
 git clone [https://github.com/uwescience](https://github.com/ML4CEA/CEATestingModel.git)
@@ -22,7 +22,7 @@ Next, to install the package, run the `setup.py` file:
 python setup.py install
 ```
 
-To ensure that the dependencies to run `axwx` are installed on your computer you will want to run the following command:
+To ensure that the dependencies to run `ml4cea` are installed on your computer you will want to run the following command:
 
 ```
 pip install -r requirements.txt
