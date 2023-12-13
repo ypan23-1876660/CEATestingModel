@@ -4,7 +4,7 @@ ML4CEATesting is an interactive software system designed to help clinicians iden
 
 **Collborators:** <br>
 Ron Dickerson <br>
-Mahima Joshi <be>
+Mahima Joshi <br>
 Janet Pan <br>
 Anuradha Ramachandran <br>
 
