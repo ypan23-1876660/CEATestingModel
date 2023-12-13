@@ -7,6 +7,13 @@ import numpy as np
 import pickle
 import os 
 
+def load_data(data_path):
+    if os.path.exists(data_path):
+        patient_phy_data = pd.read_csv(data_path)
+        patient_phy_data.drop(['Unnamed: 0'], axis = 1, inplace=True)
+        return patient_phy_data
+    else:
+        raise ValueError(f"This file {data_path} does not exist.")
 
 def feature_select(patient_phy_data):
     predictors = ['days_from_last_visit', 'days_from_surveil', 'first_visit_from_surveil', 'cea_prev_visit', 'chances_of_recur']
