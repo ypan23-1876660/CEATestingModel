@@ -13,3 +13,4 @@ dist
 examples/*.png
 environment.yml
 __pycache__
+predict_page.py
