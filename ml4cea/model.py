@@ -8,26 +8,6 @@ import pickle
 import os
 
 
-def load_data(data_path):
-    """
-    Load patient and physician information data from a CSV file.
-
-    Args:
-        - data_path (str): Path to the CSV file containing patient and physician information.
-
-    Returns:
-        - patient_phy_data (pd.DataFrame): Loaded data as a Pandas DataFrame.
-    Raises:
-        - ValueError: If the specified file does not exist.
-    """
-    if os.path.exists(data_path):
-        patient_phy_data = pd.read_csv(data_path)
-        patient_phy_data.drop(['Unnamed: 0'], axis=1, inplace=True)
-        return patient_phy_data
-    else:
-        raise ValueError(f"This file {data_path} does not exist.")
-
-
 def feature_select(patient_phy_data):
     """
     Select relevant features for model training.
@@ -62,7 +42,6 @@ def feature_select(patient_phy_data):
     y = patient_phy_data[response]
     X_train, _, y_train, _ = train_test_split(X, y, test_size=0.2, random_state=42)
     return X_train, y_train
-
 
 
 def model_train(X_train,y_train, model_path = "data/default_output/model.pkl"):

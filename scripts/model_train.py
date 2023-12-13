@@ -9,7 +9,7 @@ from ml4cea import create_var, combine_physid, data_impute, export_df, model_cre
 PATH = "data/"
 PATIENT_VISTI = "deid_cea_v2.csv" 
 PATIENT_INFOR = "Final dataset prep_072521.csv" 
-OUTPUT_PATH = "data/user_output/"
+OUTPUT_PATH = "data/default_output/"
 MODEL_NAME = "model.pkl" 
 MODEL_PATH = os.path.join(OUTPUT_PATH, MODEL_NAME)
 # --------------------------- #

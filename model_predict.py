@@ -5,7 +5,7 @@ import pandas as pd
 from ml4cea import scaling_test_features
 
 # -------- USER INPUT ------- # 
-OUTPUT_PATH = "data/user_output/" 
+OUTPUT_PATH = "data/default_output/" 
 MODEL_NAME = "model.pkl" 
 MODEL_PATH = os.path.join(OUTPUT_PATH, MODEL_NAME)
 # --------------------------- #
