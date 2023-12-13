@@ -64,7 +64,21 @@ def feature_select(patient_phy_data):
     return X_train, y_train
 
 
+
 def model_train(X_train,y_train, model_path = "data/default_output/model.pkl"):
+
+    """
+    Train a logistic regression model and save it to a specified file.
+
+    Args:
+        - X_train (pd.DataFrame): Features for training the model.
+        - y_train (pd.Series): Response variable for training the model.
+        - model_path (str): Path to save the trained model.
+
+    Returns:
+        - None
+    """
+
     model_cv = LogisticRegressionCV(Cs=[0.001, 0.01, 0.1, 1, 10], cv=5, solver='liblinear')
     model_cv.fit(X_train, y_train.values.ravel())
     with open(model_path, 'wb') as file:

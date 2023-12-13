@@ -68,6 +68,7 @@ def clean_rename_patPhyInfo(patient_phys_info):
     return patient_phys_info
 
 def get_min_max_train(phys_patient_info, output_path = "data/default_output"):
+
     '''
     Aets the minumum and maximum values for all the features for scaling
     : param phys_patient_info: pandas.DataFrame
