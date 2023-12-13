@@ -67,7 +67,7 @@ def clean_rename_patPhyInfo(patient_phys_info):
     patient_phys_info.drop(['MEDCTR','JOB_TITLE', 'PID', 'physid'], axis = 1, inplace = True)
     return patient_phys_info
 
-def get_min_max_train(phys_patient_info, output_path):
+def get_min_max_train(phys_patient_info, output_path = "data/default_output"):
     '''
     Aets the minumum and maximum values for all the features for scaling
     : param phys_patient_info: pandas.DataFrame
@@ -163,7 +163,7 @@ def encode_df(patient_phys_info):
     #data_encoded.to_csv("../data/structured_info.csv")
 
 
-def export_df(patient_phys_info, output_path):
+def export_df(patient_phys_info, output_path = "data/default_output/"):
     """
     This funtion combines all the functions for data processing and 
     preparing for modeling 
