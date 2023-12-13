@@ -5,7 +5,7 @@ import pandas as pd
 
 from ml4cea import create_var, combine_physid
 from ml4cea import data_impute, remove_nan, clean_rename_patPhyInfo, scale_patPhyInfo, encode_df
-from sklearn.preprocessing import OneHotEncoder
+
 
 import unittest 
 
