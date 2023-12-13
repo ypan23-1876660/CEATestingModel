@@ -1,5 +1,6 @@
 """
-Step 2: 
+Step 2: This cript contains code to perform data cleaning tasks such as data imputation, removing missing values, and encoding 
+data to result in a structered dataframe that can be used for fitting the model.
 """
 import numpy as np
 import pandas as pd
@@ -18,11 +19,23 @@ def data_impute(patient_dataframe):
     Output:
         Dataframe of shape (76018,33)
     """
+
+    #edge case:
+    if patient_dataframe.empty:
+        raise ValueError("Patient dataframe is empty.")
+    
     #note: since chances_of_recur is created based on value1 column, I'm not including that as a feature
     cols_to_select = ['PID', 'medctr2', 'age_deid', 'female', 'raceeth', 'partnered', 'lang', 'ins_medicare','ins_medicaid','ins_privatepay','ins_commercial','ins_other','charlson_wt',
  'memb_1yrprior','memb_at_dx','dx2membend','dx2membstart','dodi','dx2dod','IS_TOBACCO_USER','race_new','HISPANIC','charlson_wt_nocancer','BMI2',  'days_from_surveil',
  'days_from_last_visit','first_visit_from_surveil','cea_prev_visit','chances_of_recur','return_visit', 'value', 'physid_x','physid_y' ]
-    patient_dataframe = patient_dataframe.loc[:, cols_to_select]
+    
+    #Edge case: If these columns are not present in the dataframe then raise valueError
+    missing_cols = set(cols_to_select) - set(patient_dataframe.columns)
+    if missing_cols:
+        raise ValueError(f"Columns {missing_cols} are not present in the input dataframe.")
+    else:
+        patient_dataframe = patient_dataframe.loc[:, cols_to_select]
+    
     return patient_dataframe
 
 def remove_nan(patient_phys_info):
@@ -31,6 +44,15 @@ def remove_nan(patient_phys_info):
     Input: patient_phy_info dataframe that included patient and physician characteristics of shape (569781, 54)
     Output: patient_phy_info dataframe that included patient and physician characteristics of shape (447057, 50)
     """
+
+    #edge case:
+    if patient_phys_info.empty:
+        raise ValueError("Patient physician dataframe is empty.")
+    
+    #Edge case:
+    if patient_phys_info.shape[1] != 54:
+        raise ValueError("NUmber of feature columns in patient physician dataframe is not equal to 54.")
+    
     nan_val_in_col = patient_phys_info.isna().sum()/len(patient_phys_info)
     #dropping all columns that have more than 30% of data is missing
     cols_to_drop = list(nan_val_in_col[nan_val_in_col>0.3].index)
@@ -96,25 +118,30 @@ def scale_patPhyInfo(patient_phys_info):
     """
     #Extracting continous columns
     continuous_columns = get_continous_columns(patient_phys_info)
-    # Extract continuous columns from the DataFrame
-    continuous_data = patient_phys_info[continuous_columns]
 
-    # Use MinMaxScaler to standardize between 0 and 1
-    scaler = MinMaxScaler()
-    scaled_data = scaler.fit_transform(continuous_data)
-    
-    # Create a new DataFrame with the scaled values
-    #Shape of scaled_data is (447057, 26)
-    scaled_df = pd.DataFrame(scaled_data, columns=continuous_columns)
-    #print(f'Shape of scaled_data is {scaled_df.shape}')
-    #shape of categorical colimns is (447057, 24)
-    #print(f'shape of categorical colimns is {patient_phys_info.drop(columns=continuous_columns).shape}')
-    
-    # Combine the non-continuous columns with the scaled continuous columns
-    #Shape of patient_phys_info_scaled is (447057, 50)
-    patient_phys_info_scaled = pd.concat([patient_phys_info.drop(columns=continuous_columns).reset_index(drop=True), scaled_df.reset_index(drop=True)], axis=1)
+    #Edge case: Assert that the coontinuous columns == 26
+    if len(continuous_columns) != 26:
+        raise ValueError("Number of continuous columns in the data is incorrect. There has to be 26 columns")
+    else:
+        # Extract continuous columns from the DataFrame
+        continuous_data = patient_phys_info[continuous_columns]
 
-    return patient_phys_info_scaled
+        # Use MinMaxScaler to standardize between 0 and 1
+        scaler = MinMaxScaler()
+        scaled_data = scaler.fit_transform(continuous_data)
+        
+        # Create a new DataFrame with the scaled values
+        #Shape of scaled_data is (447057, 26)
+        scaled_df = pd.DataFrame(scaled_data, columns=continuous_columns)
+        #print(f'Shape of scaled_data is {scaled_df.shape}')
+        #shape of categorical colimns is (447057, 24)
+        #print(f'shape of categorical colimns is {patient_phys_info.drop(columns=continuous_columns).shape}')
+        
+        # Combine the non-continuous columns with the scaled continuous columns
+        #Shape of patient_phys_info_scaled is (447057, 50)
+        patient_phys_info_scaled = pd.concat([patient_phys_info.drop(columns=continuous_columns).reset_index(drop=True), scaled_df.reset_index(drop=True)], axis=1)
+
+        return patient_phys_info_scaled
 
 
 def encode_df(patient_phys_info):
@@ -122,7 +149,7 @@ def encode_df(patient_phys_info):
     """
     Encoding categorical features
     Input: patient_phys_info dataframe of shape (447057, 50)
-    Output: csv file that contains 447057 rows and 192 columns
+    Output: dataframe that contains 447057 rows and 192 columns
     """
 
     #categorical variables (with multiple categories)
