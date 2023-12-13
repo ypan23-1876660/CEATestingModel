@@ -1,24 +1,51 @@
 # ML4CEATesting
 Explore patient and physician characteristics that provide insights into the likelihood of a patient undergoing testing in the next three months.
 ML4CEATesting is an interactive software system designed to help clinicians identify patients for carcinoembryonic antigen (CEA) testing using a machine learning model.
+Use the URL to access the interactive website to input values to get prediction: [https://ceatestingmodel.streamlit.app/]
 
-**Collborators:** <br>
+
+Installation
+------------
+To install `ml4cea` you will need to begin by cloning `ml4cea` on your own computer by using the following `git` command:
+
+```
+git clone https://github.com/ML4CEA/CEATestingModel.git
+```
+
+Next, to install the package, run the `setup.py` file:
+
+```
+python setup.py install
+```
+
+To ensure that the dependencies to run `ml4cea` are installed on your computer you will want to run the following command:
+
+```
+pip install -r requirements.txt
+```
+
+You should now be ready to import and use `ml4cea` on your computer.
+
+Examples
+---------------------------
+To understand how to use ml4cea, please refer to 
+the [examples](https://github.com/ML4CEA/CEATestingModel/tree/main/examples) section of this GitHub page where you can find 
+examples for doing the following:
+
+- How to generate the trained model based on the user input data
+- How to use the interactive website to predict a patient's likelihood of being tested within the next three months
+- How to update the trained model based on user input and use the interactive website to predict a patient's likelihood of being tested within the next three months
+
+
+Collborators:
+---------------------------
+
 Ron Dickerson <br>
 Mahima Joshi <br>
 Janet Pan <br>
 Anuradha Ramachandran <br>
 
-
- # How to use
- 
- 1. Download all the files into the local `/data` folder: <br>
- **Do not push the `/data` folder to Github!**
-    - Pateint CEA testing: data/deid_cea_v2.csv
-    - Patient information: Final dataset prep_072521.csv
-    - Physician data: died_md_specialty_v1.csv, deid_md_dep_v1.csv, deid_md_edu_v1.csv, deid_md_main_v1.csv
-    
-   
- 2. Run `python main.py` to generate the dataframe `patient_phys_info.csv` that includes all the patient information, new patient variables, and physician characteristics. 
+Contact
+---------------------------
 
 
- 
