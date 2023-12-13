@@ -16,35 +16,41 @@ import unittest
 
 class TestLoadData(unittest.TestCase):
     def test_load_data(self):
-        test_path = "../data/modeltestvalid.csv"
+        """Smoke test to ensure the function works."""
+        test_path = "data/modeltestvalid.csv"
         result= load_data(test_path)
         self.assertIsInstance(result, pd.DataFrame)
         
     def test_unnamed_column(self):
-        path = "../data/modeltestvalid.csv"
+        """Oneshot test to ensure the no named column is deleted."""
+        path = "data/modeltestvalid.csv"
         result = load_data(path)
         self.assertNotIn('Unnamed: 0', result.columns)
         
     def test_load_data_inccorrect(self):
-        test_invalid_path = "../data/doesnotexist.csv"
+        """Edge test to make sure the filepath works."""
+        test_invalid_path = "data/doesnotexist.csv"
         with self.assertRaises(ValueError) as context:
             load_data(test_invalid_path)
         
 class TestFeatureSelect(unittest.TestCase):
     def test_feature_select(self):
-        df = load_data("../data/modeltestvalid.csv")
+        """Smoke test to ensure the function works"""
+        df = load_data("data/modeltestvalid.csv")
         X_train, y_train = feature_select(df)
         self.assertIsInstance(X_train, pd.DataFrame)
         self.assertIsInstance(X_train, pd.DataFrame)
     
     def test_fail_feature_select(self):
-        df=load_data("../data/modeltestfail.csv")
+        """Edge test by adding a fail dataset to raise ValueError."""
+        df=load_data("data/modeltestfail.csv")
         with self.assertRaises(ValueError) as context:
             feature_select(df)
 
 class TestModelTrain(unittest.TestCase):
     def test_model_train(self):
-        df = load_data("../data/modeltestvalid.csv")
+        """Smoke test to make sure the function works."""
+        df = load_data("data/modeltestvalid.csv")
         X_train, y_train = feature_select(df)
         self.temp_file = tempfile.NamedTemporaryFile(delete=False)
         os.remove(self.temp_file.name)
@@ -60,10 +66,11 @@ class TestModelTrain(unittest.TestCase):
 
 class TestScalingTestFeatures(unittest.TestCase):
     def test_scaling_test_features(self):
-        df = load_data("../data/modeltestvalid.csv")
-        min_train = np.load("../data/min_train.npy")
-        max_train = np.load("../data/max_train.npy")
-        result = scaling_test_features(df, max_train, min_train)
+        """Smoke test to make sure the function works."""
+        df = load_data("data/modeltestvalid2.csv")
+        min_train = np.load("data/default_output/min_train.npy")
+        max_train = np.load("data/default_output/max_train.npy")
+        result = scaling_test_features(df, min_train, max_train)
         self.assertIsNotNone(result)
-        ## TestScalingTestFeatures::test_scaling_test_features - ValueError: operands could not be broadcast together with shapes (2545,96) (5,)
+      
         

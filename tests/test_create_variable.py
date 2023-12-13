@@ -1,7 +1,6 @@
 """This is a test module which holds two smoke test and six oneshot tests"""
 
-from create_variable import create_var
-from create_variable import combine_physid
+
 from functools import reduce
 import glob
 import pandas as pd
@@ -14,15 +13,15 @@ class TestCreateVar(unittest.TestCase):
     """Running unittest on create_var"""
     def test_create_var(self):
         """Smoke test: ensuring the dataframe is created"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv")
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv")
+        patient_visit = "data/deid_cea_v2.csv"
+        patient_info = "data/Final dataset prep_072521.csv"
         result = create_var(patient_visit, patient_info)
-        self.assertIsNotNone(result)
+        self.assertFalse(result.empty)
         
     def test_days_from_surveil(self):
         """Oneshot test: variable output is correct"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv") 
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv")
+        patient_visit = "data/deid_cea_v2.csv"
+        patient_info = "data/Final dataset prep_072521.csv"
         df = create_var(patient_visit, patient_info)
         result = df['days_from_surveil']
         value = df['dx2cea'] - df['dx2surveildate']
@@ -30,8 +29,8 @@ class TestCreateVar(unittest.TestCase):
         
     def test_days_from_visit(self):
         """Oneshot test: variable output is correct"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv") 
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv") 
+        patient_visit = "data/deid_cea_v2.csv"
+        patient_info = "data/Final dataset prep_072521.csv"
         df = create_var(patient_visit, patient_info)
         result = df['days_from_surveil']
         value = df['dx2cea'].diff()
@@ -39,8 +38,8 @@ class TestCreateVar(unittest.TestCase):
   
     def test_first_visit(self):
         """Oneshot test: variable output is correct"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv") 
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv") 
+        patient_visit = "data/deid_cea_v2.csv"
+        patient_info = "data/Final dataset prep_072521.csv" 
         df = create_var(patient_visit, patient_info)
         result = df['first_visit_from_surveil']
         value = df.groupby('PID').head(1)['dx2cea'] - df.groupby('PID').head(1)['dx2surveildate']
@@ -49,8 +48,8 @@ class TestCreateVar(unittest.TestCase):
         
     def test_previous_visit(self):
         """Oneshot test: variable output is correct"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv") 
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv") 
+        patient_visit = "data/deid_cea_v2.csv"
+        patient_info = "data/Final dataset prep_072521.csv"
         df = create_var(patient_visit, patient_info)
         result = df['cea_prev_visit']
         expected = df['value'].shift(1)
@@ -58,8 +57,8 @@ class TestCreateVar(unittest.TestCase):
         
     def test_reoccurance(self):
         """Oneshot test: variable output is correct"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv") 
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv") 
+        patient_visit = "data/deid_cea_v2.csv"
+        patient_info = "data/Final dataset prep_072521.csv"
         df = create_var(patient_visit, patient_info)
         result = df['chances_of_recur']
         expected1 = df['value'].astype(str)
@@ -70,8 +69,8 @@ class TestCreateVar(unittest.TestCase):
        
     def test_return(self):
         """Oneshot test: variable output is correct"""
-        patient_visit = pd.read_csv("../data/deid_cea_v2.csv") 
-        patient_info = pd.read_csv("../data/Final dataset prep_072521.csv") 
+        patient_visit = "data/deid_cea_v2.csv" 
+        patient_info = "data/Final dataset prep_072521.csv" 
         df = create_var(patient_visit, patient_info)
         result = df['return_visit'] 
         value = np.where(df.groupby('PID')['dx2cea'].diff() <= 90, 1, 0)
@@ -82,7 +81,6 @@ class TestCombinePhysid(unittest.TestCase):
     """Running unittest on combine_physid"""
     def test_combine_physid(self):
         """Somke test: ensuring the dataframe is created"""
-        directory = ("../data")
-        pattern = ("*md*.csv")
-        result = combine_physid(directory, pattern)
+        directory = "data"
+        result = combine_physid(directory)
         self.assertIsNotNone(result)
