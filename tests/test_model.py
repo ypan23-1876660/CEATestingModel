@@ -61,7 +61,7 @@ class TestModelTrain(unittest.TestCase):
         
         with open(self.temp_file.name, 'rb') as file:
             loaded_output = pickle.load(file)
-        self.assertIsInstance(loaded_output['model'], BaseEstimator)
+        self.assertIsInstance(loaded_output['model'], LogisticRegressionCV)
             
 
 class TestScalingTestFeatures(unittest.TestCase):
