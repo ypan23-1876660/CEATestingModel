@@ -113,6 +113,3 @@ Ron Dickerson <br>
 Mahima Joshi <br>
 Janet Pan <br>
 Anuradha Ramachandran <br>
-
-Contact
--------
