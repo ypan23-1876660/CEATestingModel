@@ -36,6 +36,12 @@ examples for doing the following:
 - How to use the interactive website to predict a patient's likelihood of being tested within the next three months
 - How to update the trained model based on user input and use the interactive website to predict a patient's likelihood of being tested within the next three months
 
+Tests
+---------------------------
+Run the command in the root directory:
+```
+python -m unittest discover -s tests
+```
 
 Collborators:
 ---------------------------
